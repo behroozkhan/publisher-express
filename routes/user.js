@@ -252,17 +252,23 @@ router.post('/login',async function (req, res) {
     // check userName and password sent by user and authenticate him
     let user;
     try {
-        user = await models.User.find({
+        user = await models.User.findOne({
             where: {
                 username: req.body.username,
                 password: req.body.password,
             },
             attributes: ['id', 'role']
         });
+
+        if (!user) {
+            res.status(401).json(
+                new Response(false, {}, "Username or password is wrong").json()
+            );
+            return;
+        }
     } catch (error) {
-        console.log("error", error)
-        res.status(401).json(
-            new Response(false, {}, "Username or password is wrong").json()
+        res.status(500).json(
+            new Response(false, {error}, "Username or password is wrong").json()
         );
         return;
     }
