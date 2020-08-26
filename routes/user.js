@@ -274,7 +274,7 @@ router.post('/login',async function (req, res) {
         return;
     }
 
-    const accessToken = jwt.sign(user, process.env.JWT_ACCESS_TOKEN_SECRET);
+    const accessToken = jwt.sign(user.toJSON(), process.env.JWT_ACCESS_TOKEN_SECRET);
     res.json(
         new Response(true, {accessToken: accessToken}).json()
     );
