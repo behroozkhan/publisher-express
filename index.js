@@ -7,7 +7,6 @@ let express = require('express');
 let cors = require('cors');
 let app = express();
 app.use(cors());
-app.options('*', cors());
 
 let appBaseRoute = '/api';
 
