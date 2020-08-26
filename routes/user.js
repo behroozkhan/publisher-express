@@ -250,6 +250,7 @@ router.post('/paymentverify',async function (req, res) {
 router.post('/login',async function (req, res) {
     // login user
     // check userName and password sent by user and authenticate him
+    console.log("in /login")
     let user;
     try {
         user = await models.User.find({
