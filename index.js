@@ -7,6 +7,8 @@ let express = require('express');
 let cors = require('cors');
 let app = express();
 app.use(function (req, res, next) {
+    console.log("Check Cors")
+
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', '*');
 
