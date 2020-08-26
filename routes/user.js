@@ -254,8 +254,8 @@ router.post('/login',async function (req, res) {
     try {
         user = await models.User.findOne({
             where: {
-                username: req.body.username,
-                password: req.body.password,
+                username: req.body.username || "",
+                password: req.body.password || "",
             },
             attributes: ['id', 'role']
         });
