@@ -267,6 +267,7 @@ router.post('/login',async function (req, res) {
             return;
         }
     } catch (error) {
+        console.log("error", error)
         res.status(500).json(
             new Response(false, {error}, "Username or password is wrong").json()
         );
