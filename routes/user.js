@@ -250,7 +250,6 @@ router.post('/paymentverify',async function (req, res) {
 router.post('/login',async function (req, res) {
     // login user
     // check userName and password sent by user and authenticate him
-    console.log("in /login")
     let user;
     try {
         user = await models.User.find({
@@ -260,7 +259,8 @@ router.post('/login',async function (req, res) {
             },
             attributes: ['id', 'role']
         });
-    } catch {
+    } catch (error) {
+        console.log("error", error)
         res.status(401).json(
             new Response(false, {}, "Username or password is wrong").json()
         );
