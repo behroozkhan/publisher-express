@@ -4,7 +4,11 @@ let { unlessRoute } = require('./utils/utils.js');
 let Response = require('./utils/response.js');
 
 let express = require('express');
+let cors = require('cors');
 let app = express();
+app.use(cors());
+app.options('*', cors());
+
 let appBaseRoute = '/api';
 
 app.use(express.json());
