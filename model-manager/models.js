@@ -8,6 +8,7 @@ const Service = require('../models/service');
 const Component = require('../models/component');
 const Config = require('../models/config');
 const CreditTransaction = require('../models/credit-transaction');
+const Response = require('../utils/response');
 const {DataTypes} = Sequelize;
  
 const sequelize = new Sequelize(
@@ -51,6 +52,7 @@ let findAndCountAll = (req, res, model) => {
             }).json()
         );
     }).catch(error => {
+        console.log("findAllError", error)
         res.status(500).json(
             new Response(false, {}, error.message).json()
         );
