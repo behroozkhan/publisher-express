@@ -1,4 +1,5 @@
 let { getConfig } = require("../models/config");
+let {models} = require('../model-manager/models');
 
 let PublisherUtils = {};
 
