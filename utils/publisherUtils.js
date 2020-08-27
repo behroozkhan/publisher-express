@@ -33,17 +33,20 @@ PublisherUtils.isUserNameUnique = async (username) => {
     }
 }
 
-PublisherUtils.isSubDomainUnique = (subDomain) => {
+PublisherUtils.isSubDomainUnique = async (subDomain) => {
     if (!subDomain)
         return true;
     
-    return models.Website.count({ where: { subDomain: subDomain } })
-      .then(count => {
+    try {
+        let count = await models.Website.count({ where: { subDomain: subDomain.toLowerCase() } })
         if (count != 0) {
-          return false;
+            return false;
         }
         return true;
-    });
+    } catch (error) {
+        console.log("PublisherUtils.isUserNameUnique", error);
+        return false;
+    }
 }
 
 PublisherUtils.createOrUpgradeWebsiteInWeblancer = async (endUserId, endWebsiteId,

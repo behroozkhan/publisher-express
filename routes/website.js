@@ -43,8 +43,8 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     // create new website
     let name = req.body.name;
-    let metadata = req.body.metadata;
-    let subDomain = req.body.subDomain;
+    let metadata = req.body.metadata || {};
+    let subDomain = req.body.subDomain || "";
     let description = req.body.description;
 
     let isUnique = await PublisherUtils.isSubDomainUnique(subDomain);
@@ -56,30 +56,46 @@ router.post('/', async (req, res) => {
 
     let plan;
     try {
-        plan = await models.Plan.find({
+        plan = await models.Plan.findOne({
             where: {
                 order: 0,
                 isTrial: true
             }
         });
-    } catch {
-        res.status(404).json(
-            new Response(false, {}, "Trial plan not found").json()
+
+        if (!plan) {
+            res.status(404).json(
+                new Response(false, {}, "Trial plan not found").json()
+            );
+            return;
+        }
+    } catch (error) {
+        console.log("/website/ error 1", error);
+        res.status(500).json(
+            new Response(false, {error}, "Server error").json()
         );
         return;
     }
 
     let user;
     try {
-        user = await models.user.find({
+        user = await models.user.findOne({
             where: {
                 id: req.user.id
             },
             include: [models.Website]
         });
-    } catch {
-        res.status(404).json(
-            new Response(false, {}, "User not found").json()
+
+        if (!user) {
+            res.status(404).json(
+                new Response(false, {}, "User not found").json()
+            );
+            return;
+        }
+    } catch (error) {
+        console.log("/website/ error 2", error);
+        res.status(500).json(
+            new Response(false, {error}, "Server error").json()
         );
         return;
     }
@@ -124,18 +140,19 @@ router.post('/', async (req, res) => {
         if (weblancerResponse.success) {
             res.json(
                 new Response(true, {
-                    website: newWebsite
+                    website: website.toJSON()
                 }).json()
             );
         } else {
             throw Error (`Can't add website to weblancer server`);
         }
     } catch (error) {
+        console.log("/website/ error 3", error);
         // Rollback transaction only if the transaction object is defined
         if (transaction) await transaction.rollback();
         
         res.status(500).json(
-            new Response(false, {}, error.message).json()
+            new Response(false, {error}, error.message).json()
         );
     }
 })
