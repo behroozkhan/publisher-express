@@ -22,7 +22,7 @@ PublisherUtils.getBackMoney = (oldPlan) => {
 
 PublisherUtils.isUserNameUnique = async (username) => {
     try {
-        let count = await models.User.count({ where: { username: username } });
+        let count = await models.User.count({ where: { username: username.toLowerCase() } });
         if (count != 0) {
             return false;
         }

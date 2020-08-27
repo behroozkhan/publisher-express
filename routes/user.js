@@ -254,7 +254,7 @@ router.post('/login',async function (req, res) {
     try {
         user = await models.User.findOne({
             where: {
-                username: req.body.username || "",
+                username: (req.body.username || "").toLowerCase(),
                 password: req.body.password || "",
             },
             attributes: ['id', 'role']
@@ -282,8 +282,22 @@ router.post('/login',async function (req, res) {
 
 router.post('/register',async function (req, res) {
     // register user
-    let username = req.body.username;
-    let password = req.body.password;
+    let username = req.body.username || "";
+    let password = req.body.password || "";
+
+    if (username.lenght < 3) {
+        res.status(400).json(
+            new Response(false, {}, "Username is short, must at least 3 character").json()
+        );
+        return;
+    } 
+
+    if (password.lenght < 3) {
+        res.status(400).json(
+            new Response(false, {}, "Password is short, must at least 3 character").json()
+        );
+        return;
+    }
 
     let isUnique = await PublisherUtils.isUserNameUnique(username);
     if (!isUnique) {
@@ -295,7 +309,7 @@ router.post('/register',async function (req, res) {
     
     try {
         await models.User.create({
-            username,
+            username: username.toLowerCase(),
             password
         });
 
