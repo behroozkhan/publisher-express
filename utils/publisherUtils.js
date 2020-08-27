@@ -19,14 +19,17 @@ PublisherUtils.getBackMoney = (oldPlan) => {
     return Math.max(0, backMoney);
 }
 
-PublisherUtils.isUserNameUnique = (username) => {
-    return models.User.count({ where: { username: username } })
-      .then(count => {
+PublisherUtils.isUserNameUnique = async (username) => {
+    try {
+        let count = await models.User.count({ where: { username: username } });
         if (count != 0) {
-          return false;
+            return false;
         }
         return true;
-    });
+    } catch (error) {
+        console.log("PublisherUtils.isUserNameUnique", error);
+        return false;
+    }
 }
 
 PublisherUtils.isSubDomainUnique = (subDomain) => {

@@ -290,6 +290,7 @@ router.post('/register',async function (req, res) {
         res.status(409).json(
             new Response(false, {}, "Username is in use").json()
         );
+        return;
     }
     
     try {
@@ -301,11 +302,10 @@ router.post('/register',async function (req, res) {
         res.status(201).json(
             new Response(true, {}).json()
         );
-    } catch {
+    } catch (error) {
         res.status(500).json(
-            new Response(false, {}, "Username is in use").json()
+            new Response(false, {error}, "Server error").json()
         );
-        return;
     }
 })
 
