@@ -45,7 +45,7 @@ router.post('/', async (req, res) => {
     let name = req.body.name;
     let metadata = req.body.metadata || {};
     let subDomain = req.body.subDomain || "";
-    let description = req.body.description;
+    let description = req.body.description || "";
 
     let isUnique = await PublisherUtils.isSubDomainUnique(subDomain);
     if (!isUnique) {
@@ -64,10 +64,13 @@ router.post('/', async (req, res) => {
         });
 
         if (!plan) {
-            res.status(404).json(
-                new Response(false, {}, "Trial plan not found").json()
-            );
-            return;
+            let configResult = await PublisherUtils.getWeblancerConfig("TrialPlan");
+            if (!configResult || !configResult.success) {
+                throw new Error("Can't fetch trial plan");
+            }
+
+            plan = configResult.data.configValue;
+            plan = await models.Plan.create(plan);
         }
     } catch (error) {
         console.log("/website/ error 1", error);

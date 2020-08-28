@@ -1,5 +1,6 @@
 let { getConfig } = require("../models/config");
 let {models} = require('../model-manager/models');
+const axios = require('axios');
 
 let PublisherUtils = {};
 
@@ -72,6 +73,25 @@ PublisherUtils.createOrUpgradeWebsiteInWeblancer = async (endUserId, endWebsiteI
 PublisherUtils.checkOwnerShip = (req, res, next) => {
     let serviceId = req.param.id;
     // if user has service id => next(), else => reject()
+}
+
+PublisherUtils.getWeblancerConfig = async (key) => {
+    let id = process.env.PUBLISHER_ID;
+    let password = process.env.PUBLISHER_PASSWORD;
+    let url = process.env.WEBLANCER_EXPRESS_URL;
+
+    try {
+        let response = await axios.post(`${url}/config/getbykey`, {key}, {
+            headers: {
+                "publisher_id": id,
+                "publisher_password": password,
+            }
+        });
+
+        return response.data;
+    } catch (error) {
+        return error.response.data;
+    }
 }
 
 module.exports = PublisherUtils;

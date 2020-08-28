@@ -5,6 +5,9 @@ let Response = require('./utils/response.js');
 
 let express = require('express');
 let cors = require('cors');
+
+// let dbInitiator = require('./dbInitiator');
+
 let app = express();
 app.use(cors());
 app.options('*', cors());
