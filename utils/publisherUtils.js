@@ -88,10 +88,7 @@ PublisherUtils.getWeblancerConfig = async (key) => {
             data: {key},
             headers: {
                 'publisher-id': id,
-                'publisher-password': password,
-                'Authorization': "test test",
-                "Access-Control-Allow-Origin": "*",
-                "access-control-allow-headers": "*"
+                'publisher-password': password
             }
         })
         
