@@ -82,7 +82,7 @@ router.post('/', async (req, res) => {
 
     let user;
     try {
-        user = await models.user.findOne({
+        user = await models.User.findOne({
             where: {
                 id: req.user.id
             },
