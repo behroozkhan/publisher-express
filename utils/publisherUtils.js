@@ -82,13 +82,16 @@ PublisherUtils.getWeblancerConfig = async (key) => {
 
     console.log("getWeblancerConfig", id, password)
     try {
-        let response = await axios.post(`${url}/config/getbykey`, {key}, {
+        let response = await axios({
+            url: `${url}/config/getbykey`,
+            method: 'post',
+            data: {key},
             headers: {
-                "publisher_id": id,
-                "publisher_password": password,
+                'publisher_id': id,
+                'publisher_password': password,
             }
-        });
-
+        })
+        
         return response.data;
     } catch (error) {
         return error.response.data;
