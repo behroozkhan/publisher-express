@@ -80,6 +80,7 @@ PublisherUtils.getWeblancerConfig = async (key) => {
     let password = process.env.PUBLISHER_PASSWORD;
     let url = process.env.WEBLANCER_EXPRESS_URL;
 
+    console.log("getWeblancerConfig", id, password)
     try {
         let response = await axios.post(`${url}/config/getbykey`, {key}, {
             headers: {
