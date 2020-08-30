@@ -33,8 +33,6 @@ const models = {
     CreditTransaction: CreditTransaction(sequelize, DataTypes),
 };
 
-console.log("modelManager", models.Website.Instance.prototype);
-
 let findAndCountAll = (req, res, model) => {
     let pageNumber = req.query.pageNumber || 1;
     let rowPerPage = req.query.rowPerPage || 10;
