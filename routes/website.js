@@ -85,8 +85,7 @@ router.post('/', async (req, res) => {
         user = await models.User.findOne({
             where: {
                 id: req.user.id
-            },
-            include: [models.Website]
+            }
         });
 
         if (!user) {
@@ -110,13 +109,6 @@ router.post('/', async (req, res) => {
 
         let boughtDate = moment.utc();
         let expireDate = moment.utc().add(plan.trialDuration, 'd');
-
-        // let websitePlan = await models.WebsitePlan.create({
-        //     boughtDate, expireDate, plan
-        // },{
-        //     include: [models.Plan],
-        //     transaction
-        // });
     
         let website = await models.Website.create({
             name,
@@ -125,11 +117,10 @@ router.post('/', async (req, res) => {
             description,
             websitePlan
         }, {
-            include: [models.WebsitePlan],
             transaction
-        })
+        });
 
-        await website.addPlan(plan, {transaction});
+        await website.addPlan(plan, {through: {boughtDate, expireDate}, transaction});
 
         await user.addWebsite(website, {transaction});
         
