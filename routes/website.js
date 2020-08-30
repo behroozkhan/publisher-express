@@ -45,6 +45,7 @@ router.post('/', async (req, res) => {
     let name = req.body.name;
     let metadata = req.body.metadata || {};
     let description = req.body.description || "";
+    let planId = req.body.planId;
     let userId = req.user.id;
 
     if (!await PublisherUtils.isSiteNameUnique(name, userId)) {
@@ -55,12 +56,21 @@ router.post('/', async (req, res) => {
 
     let plan;
     try {
-        plan = await models.Plan.findOne({
-            where: {
-                order: 0,
-                isTrial: true
-            }
-        });
+        if (planId) {
+            plan = await models.Plan.findOne({
+                where: {
+                    id: planId
+                }
+            });
+        } else {
+            plan = await models.Plan.findOne({
+                where: {
+                    order: 0,
+                    hasTrial: true,
+                    priceMonthly: 0
+                }
+            });
+        }
 
         if (!plan) {
             let configResult = await PublisherUtils.getWeblancerConfig("TrialPlan");
