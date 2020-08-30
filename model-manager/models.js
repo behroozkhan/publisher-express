@@ -35,11 +35,9 @@ const models = {
 
 let allModels = {};
 Object.values(models).forEach(model => {
-    console.log(model.name);
-    allModels[model.modelName] = model;
+    allModels[model.name] = model;
 });
 
-console.log(allModels);
 Object.values(models).forEach(model => {
     if (model.associate)
         model.associate(allModels);
