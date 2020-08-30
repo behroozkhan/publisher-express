@@ -27,6 +27,11 @@ const Website = (sequelize, DataTypes) => {
         }
     });
      
+    Website.associate = function(models) {
+        models.website.belongsToMany(models.plan, { through: models.website_plan });
+        models.plan.belongsToMany(models.website, { through: models.website_plan });
+    };
+     
     return Website;
 };
 
