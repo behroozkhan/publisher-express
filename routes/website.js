@@ -116,12 +116,11 @@ router.post('/', async (req, res) => {
             subDomain,
             description
         }, {
-            include: {model: models.Plan},
             transaction
         });
 
         console.log("modelManager", website, website.prototype);
-        await website.addPlan(plan, {through: {boughtDate, expireDate}, transaction});
+        await website.addPlans(plan, {through: {boughtDate, expireDate}, transaction});
 
         await user.addWebsite(website, {transaction});
         

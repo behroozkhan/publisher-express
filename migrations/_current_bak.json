@@ -255,15 +255,15 @@
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
                 },
-                "websitePlanId": {
+                "websiteId": {
                     "allowNull": true,
                     "references": {
-                        "model": "website_plans",
+                        "model": "websites",
                         "key": "id"
                     },
                     "onDelete": "SET NULL",
                     "onUpdate": "CASCADE",
-                    "field": "websitePlanId",
+                    "field": "websiteId",
                     "seqType": "Sequelize.BIGINT"
                 }
             },
@@ -397,13 +397,6 @@
         "website_plans": {
             "tableName": "website_plans",
             "schema": {
-                "id": {
-                    "unique": true,
-                    "autoIncrement": true,
-                    "primaryKey": true,
-                    "field": "id",
-                    "seqType": "Sequelize.BIGINT"
-                },
                 "boughtDate": {
                     "field": "boughtDate",
                     "seqType": "Sequelize.DATE"
@@ -439,15 +432,26 @@
                     "seqType": "Sequelize.DATE"
                 },
                 "websiteId": {
-                    "allowNull": true,
+                    "primaryKey": true,
                     "references": {
                         "model": "websites",
                         "key": "id"
                     },
-                    "onDelete": "SET NULL",
+                    "onDelete": "CASCADE",
                     "onUpdate": "CASCADE",
                     "field": "websiteId",
                     "seqType": "Sequelize.BIGINT"
+                },
+                "planId": {
+                    "primaryKey": true,
+                    "references": {
+                        "model": "plans",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "field": "planId",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -507,10 +511,21 @@
                     "onUpdate": "CASCADE",
                     "field": "userId",
                     "seqType": "Sequelize.BIGINT"
+                },
+                "planId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "plans",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "planId",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
         }
     },
-    "revision": 1
+    "revision": 3
 }
