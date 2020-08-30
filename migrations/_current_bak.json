@@ -1,0 +1,516 @@
+{
+    "tables": {
+        "apps": {
+            "tableName": "apps",
+            "schema": {
+                "id": {
+                    "unique": true,
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "field": "id",
+                    "seqType": "Sequelize.BIGINT"
+                },
+                "name": {
+                    "field": "name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "serverIpAddress": {
+                    "field": "serverIpAddress",
+                    "seqType": "Sequelize.STRING"
+                },
+                "url": {
+                    "field": "url",
+                    "seqType": "Sequelize.STRING"
+                },
+                "metadata": {
+                    "field": "metadata",
+                    "seqType": "Sequelize.JSON"
+                },
+                "mode": {
+                    "field": "mode",
+                    "seqType": "Sequelize.ENUM('private', 'public')"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "userId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "users",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "userId",
+                    "seqType": "Sequelize.BIGINT"
+                }
+            },
+            "indexes": []
+        },
+        "components": {
+            "tableName": "components",
+            "schema": {
+                "id": {
+                    "unique": true,
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "field": "id",
+                    "seqType": "Sequelize.BIGINT"
+                },
+                "name": {
+                    "field": "name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "url": {
+                    "field": "url",
+                    "seqType": "Sequelize.STRING"
+                },
+                "metadata": {
+                    "field": "metadata",
+                    "seqType": "Sequelize.JSON"
+                },
+                "mode": {
+                    "field": "mode",
+                    "seqType": "Sequelize.ENUM('private', 'public')"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "userId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "users",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "userId",
+                    "seqType": "Sequelize.BIGINT"
+                }
+            },
+            "indexes": []
+        },
+        "configs": {
+            "tableName": "configs",
+            "schema": {
+                "id": {
+                    "unique": true,
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "key": {
+                    "unique": true,
+                    "field": "key",
+                    "seqType": "Sequelize.STRING"
+                },
+                "value": {
+                    "field": "value",
+                    "seqType": "Sequelize.JSON"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "credit_transactions": {
+            "tableName": "credit_transactions",
+            "schema": {
+                "id": {
+                    "unique": true,
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "field": "id",
+                    "seqType": "Sequelize.BIGINT"
+                },
+                "amount": {
+                    "field": "amount",
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "useType": {
+                    "field": "useType",
+                    "seqType": "Sequelize.ENUM('plan', 'payment', 'other')"
+                },
+                "resNum": {
+                    "field": "resNum",
+                    "seqType": "Sequelize.STRING"
+                },
+                "description": {
+                    "field": "description",
+                    "seqType": "Sequelize.JSON"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "userId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "users",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "userId",
+                    "seqType": "Sequelize.BIGINT"
+                }
+            },
+            "indexes": []
+        },
+        "plans": {
+            "tableName": "plans",
+            "schema": {
+                "id": {
+                    "unique": true,
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "name": {
+                    "unique": true,
+                    "field": "name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "isTrial": {
+                    "field": "isTrial",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "trialDuration": {
+                    "field": "trialDuration",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "order": {
+                    "field": "order",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "priceMonthly": {
+                    "field": "priceMonthly",
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "priceYearly": {
+                    "field": "priceYearly",
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "offPriceMonthly": {
+                    "field": "offPriceMonthly",
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "offpriceYearly": {
+                    "field": "offpriceYearly",
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "description": {
+                    "field": "description",
+                    "seqType": "Sequelize.JSON"
+                },
+                "summery": {
+                    "field": "summery",
+                    "seqType": "Sequelize.STRING"
+                },
+                "weblancerResourceId": {
+                    "field": "weblancerResourceId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "weblancerPermissionsId": {
+                    "field": "weblancerPermissionsId",
+                    "seqType": "Sequelize.ARRAY(Sequelize.INTEGER)"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "websitePlanId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "website_plans",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "websitePlanId",
+                    "seqType": "Sequelize.BIGINT"
+                }
+            },
+            "indexes": []
+        },
+        "services": {
+            "tableName": "services",
+            "schema": {
+                "id": {
+                    "unique": true,
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "field": "id",
+                    "seqType": "Sequelize.BIGINT"
+                },
+                "name": {
+                    "field": "name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "serverIpAddress": {
+                    "field": "serverIpAddress",
+                    "seqType": "Sequelize.STRING"
+                },
+                "url": {
+                    "field": "url",
+                    "seqType": "Sequelize.STRING"
+                },
+                "metadata": {
+                    "field": "metadata",
+                    "seqType": "Sequelize.JSON"
+                },
+                "mode": {
+                    "field": "mode",
+                    "seqType": "Sequelize.ENUM('private', 'public')"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "userId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "users",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "userId",
+                    "seqType": "Sequelize.BIGINT"
+                }
+            },
+            "indexes": []
+        },
+        "users": {
+            "tableName": "users",
+            "schema": {
+                "id": {
+                    "unique": true,
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "field": "id",
+                    "seqType": "Sequelize.BIGINT"
+                },
+                "username": {
+                    "unique": true,
+                    "field": "username",
+                    "seqType": "Sequelize.STRING"
+                },
+                "firstName": {
+                    "field": "firstName",
+                    "seqType": "Sequelize.STRING"
+                },
+                "lastName": {
+                    "field": "lastName",
+                    "seqType": "Sequelize.STRING"
+                },
+                "role": {
+                    "defaultValue": {
+                        "value": "user"
+                    },
+                    "field": "role",
+                    "seqType": "Sequelize.ENUM('weblancer', 'publisher', 'admin', 'user')"
+                },
+                "nationalCode": {
+                    "field": "nationalCode",
+                    "seqType": "Sequelize.STRING"
+                },
+                "mobile": {
+                    "field": "mobile",
+                    "seqType": "Sequelize.STRING"
+                },
+                "email": {
+                    "field": "email",
+                    "seqType": "Sequelize.STRING"
+                },
+                "password": {
+                    "field": "password",
+                    "seqType": "Sequelize.STRING"
+                },
+                "credit": {
+                    "field": "credit",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "emailVerify": {
+                    "field": "emailVerify",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "mobileVerify": {
+                    "field": "mobileVerify",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "website_plans": {
+            "tableName": "website_plans",
+            "schema": {
+                "id": {
+                    "unique": true,
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "field": "id",
+                    "seqType": "Sequelize.BIGINT"
+                },
+                "boughtDate": {
+                    "field": "boughtDate",
+                    "seqType": "Sequelize.DATE"
+                },
+                "expireTime": {
+                    "field": "expireTime",
+                    "seqType": "Sequelize.DATE"
+                },
+                "totalPriceOfPlan": {
+                    "field": "totalPriceOfPlan",
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "totalPayForPlan": {
+                    "field": "totalPayForPlan",
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "upgradedToUpperPlan": {
+                    "field": "upgradedToUpperPlan",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "extended": {
+                    "field": "extended",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "websiteId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "websites",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "websiteId",
+                    "seqType": "Sequelize.BIGINT"
+                }
+            },
+            "indexes": []
+        },
+        "websites": {
+            "tableName": "websites",
+            "schema": {
+                "id": {
+                    "unique": true,
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "field": "id",
+                    "seqType": "Sequelize.BIGINT"
+                },
+                "name": {
+                    "field": "name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "description": {
+                    "field": "description",
+                    "seqType": "Sequelize.STRING"
+                },
+                "subDomain": {
+                    "unique": true,
+                    "field": "subDomain",
+                    "seqType": "Sequelize.STRING"
+                },
+                "serverIpAddress": {
+                    "field": "serverIpAddress",
+                    "seqType": "Sequelize.STRING"
+                },
+                "url": {
+                    "field": "url",
+                    "seqType": "Sequelize.STRING"
+                },
+                "metadata": {
+                    "field": "metadata",
+                    "seqType": "Sequelize.JSON"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "userId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "users",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "userId",
+                    "seqType": "Sequelize.BIGINT"
+                }
+            },
+            "indexes": []
+        }
+    },
+    "revision": 1
+}

@@ -1,11 +1,5 @@
 const WebsitePlan = (sequelize, DataTypes) => {
     const WebsitePlan = sequelize.define('website_plan', {
-        id: {
-            type: DataTypes.BIGINT,
-            unique: true,
-            autoIncrement: true,
-            primaryKey: true
-        },
         boughtDate: {
             type: DataTypes.DATE,
         },
@@ -27,8 +21,8 @@ const WebsitePlan = (sequelize, DataTypes) => {
     });
      
     WebsitePlan.associate = function(models) {
-        models.website.hasOne(models.website_plan);
-        models.website_plan.hasOne(models.plan);
+        models.website.belongsToMany(models.plan, { through: models.website_plan });
+        models.plan.belongsToMany(models.website, { through: models.website_plan });
     };
 
     return WebsitePlan;

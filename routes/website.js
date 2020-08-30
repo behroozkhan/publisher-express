@@ -111,12 +111,12 @@ router.post('/', async (req, res) => {
         let boughtDate = moment.utc();
         let expireDate = moment.utc().add(plan.trialDuration, 'd');
 
-        let websitePlan = await models.WebsitePlan.create({
-            boughtDate, expireDate, plan
-        },{
-            include: [models.Plan],
-            transaction
-        });
+        // let websitePlan = await models.WebsitePlan.create({
+        //     boughtDate, expireDate, plan
+        // },{
+        //     include: [models.Plan],
+        //     transaction
+        // });
     
         let website = await models.Website.create({
             name,
@@ -129,9 +129,9 @@ router.post('/', async (req, res) => {
             transaction
         })
 
-        user.websites.push(website);
+        await website.addPlan(plan, {transaction});
 
-        await user.save({fields: ['websites'], transaction});
+        await user.addWebsite(website, {transaction});
         
         await transaction.commit();
 
