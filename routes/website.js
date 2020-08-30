@@ -172,13 +172,6 @@ router.put('/', async (req, res) => {
         return;
     }
 
-    let isUnique = await PublisherUtils.isSubDomainUnique(subDomain);
-    if (!isUnique && website.subDomain !== subDomain) {
-        res.status(409).json(
-            new Response(false, {}, "Subdomain is in use").json()
-        );
-    }
-
     let name = req.body.name || website.name;
     let description = req.body.description || website.description;
     let subDomain = req.body.subDomain || website.subDomain;

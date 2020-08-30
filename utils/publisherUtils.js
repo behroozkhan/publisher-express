@@ -35,8 +35,8 @@ PublisherUtils.isUserNameUnique = async (username) => {
 }
 
 PublisherUtils.isSiteNameUnique = async (name, userId) => {
-    if (!subDomain)
-        return true;
+    if (!name)
+        return false;
     
     try {
         let count = await models.Website.count({ where: { name, userId } })
