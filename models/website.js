@@ -22,6 +22,10 @@ const Website = (sequelize, DataTypes) => {
             type: DataTypes.JSON
         }
     });
+    
+    Website.associate = function(models) {
+        Website.belongsTo(models.user);
+    }
      
     return Website;
 };
