@@ -131,7 +131,7 @@ router.post('/', async (req, res) => {
 
         console.log("websitePlan", websitePlan);
         let weblancerResponse = await PublisherUtils.createOrUpgradeWebsiteInWeblancer(
-            website.toJSON(), plan.toJSON(), websitePlan.toJSON()
+            website.toJSON(), plan.toJSON(), websitePlan[0].toJSON()
         );
 
         if (weblancerResponse.success) {
