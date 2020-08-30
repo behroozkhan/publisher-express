@@ -45,7 +45,7 @@ const User = (sequelize, DataTypes) => {
     });
      
     User.associate = function(models) {
-        models.user.hasMany(models.website, {foreignKey: 'userId'});
+        models.user.hasMany(models.website);
         models.website.belongsTo(models.user);
         models.user.hasMany(models.app);
         models.app.belongsTo(models.user);
