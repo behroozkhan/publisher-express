@@ -114,8 +114,7 @@ router.post('/', async (req, res) => {
             name,
             metadata,
             subDomain,
-            description,
-            websitePlan
+            description
         }, {
             transaction
         });
