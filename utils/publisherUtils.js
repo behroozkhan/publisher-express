@@ -65,6 +65,7 @@ PublisherUtils.createOrUpgradeWebsiteInWeblancer = async (websitePlan) => {
 
         return response.data;
     } catch (error) {
+        console.log("PublisherUtils.createOrUpgradeWebsiteInWeblancer", error);
         return error.response.data;
     }
 }
