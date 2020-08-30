@@ -23,10 +23,6 @@ const Website = (sequelize, DataTypes) => {
         }
     });
     
-    Website.associate = function(models) {
-        Website.belongsTo(models.user);
-    }
-     
     return Website;
 };
 

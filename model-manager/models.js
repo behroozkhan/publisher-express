@@ -33,6 +33,16 @@ const models = {
     CreditTransaction: CreditTransaction(sequelize, DataTypes),
 };
 
+let allModels = {};
+Object.values(models).forEach(model => {
+    allModels[model.modelName] = model;
+});
+
+Object.values(models).forEach(model => {
+    if (allModels[model].associate)
+        allModels[model].associate(allModels);
+});
+
 let findAndCountAll = (req, res, model) => {
     let pageNumber = req.query.pageNumber || 1;
     let rowPerPage = req.query.rowPerPage || 10;

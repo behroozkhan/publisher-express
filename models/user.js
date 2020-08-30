@@ -45,15 +45,15 @@ const User = (sequelize, DataTypes) => {
     });
      
     User.associate = function(models) {
-        User.hasMany(models.website);
+        models.user.hasMany(models.website);
         models.website.belongsTo(models.user);
-        User.hasMany(models.app);
+        models.user.hasMany(models.app);
         models.app.belongsTo(models.user);
-        User.hasMany(models.service);
+        models.user.hasMany(models.service);
         models.service.belongsTo(models.user);
-        User.hasMany(models.component);
+        models.user.hasMany(models.component);
         models.component.belongsTo(models.user);
-        User.hasMany(models.credit_transaction);
+        models.user.hasMany(models.credit_transaction);
         models.credit_transaction.belongsTo(models.user);
     };
 
