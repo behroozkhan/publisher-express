@@ -201,8 +201,8 @@
                     "field": "name",
                     "seqType": "Sequelize.STRING"
                 },
-                "isTrial": {
-                    "field": "isTrial",
+                "hasTrial": {
+                    "field": "hasTrial",
                     "seqType": "Sequelize.BOOLEAN"
                 },
                 "trialDuration": {
@@ -521,5 +521,5 @@
             }
         }
     },
-    "revision": 7
+    "revision": 8
 }

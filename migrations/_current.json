@@ -394,17 +394,16 @@
                     "field": "totalPriceOfPlan",
                     "seqType": "Sequelize.FLOAT"
                 },
+                "planTime": {
+                    "defaultValue": {
+                        "value": "trial"
+                    },
+                    "field": "planTime",
+                    "seqType": "Sequelize.ENUM('trial', 'monthly', 'yearly')"
+                },
                 "totalPayForPlan": {
                     "field": "totalPayForPlan",
                     "seqType": "Sequelize.FLOAT"
-                },
-                "upgradedToUpperPlan": {
-                    "field": "upgradedToUpperPlan",
-                    "seqType": "Sequelize.BOOLEAN"
-                },
-                "extended": {
-                    "field": "extended",
-                    "seqType": "Sequelize.BOOLEAN"
                 },
                 "addedProducts": {
                     "field": "addedProducts",
@@ -465,6 +464,10 @@
                     "field": "name",
                     "seqType": "Sequelize.STRING"
                 },
+                "displayName": {
+                    "field": "displayName",
+                    "seqType": "Sequelize.STRING"
+                },
                 "description": {
                     "field": "description",
                     "seqType": "Sequelize.STRING"
@@ -521,5 +524,5 @@
             }
         }
     },
-    "revision": 8
+    "revision": 9
 }

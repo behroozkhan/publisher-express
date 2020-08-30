@@ -9,14 +9,13 @@ const WebsitePlan = (sequelize, DataTypes) => {
         totalPriceOfPlan: {
             type: DataTypes.FLOAT,
         },
+        planTime: {
+            type:   DataTypes.ENUM,
+            values: ['trial', 'monthly', 'yearly'],
+            defaultValue: 'trial'
+        },
         totalPayForPlan: {
             type: DataTypes.FLOAT,
-        },
-        upgradedToUpperPlan: {
-            type: DataTypes.BOOLEAN,
-        },
-        extended: {
-            type: DataTypes.BOOLEAN,
         },
         addedProducts: {
             type: DataTypes.JSON,

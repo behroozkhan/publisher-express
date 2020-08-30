@@ -50,7 +50,7 @@ PublisherUtils.isSiteNameUnique = async (name, userId) => {
     }
 }
 
-PublisherUtils.createOrUpgradeWebsiteInWeblancer = async (website, plan, websitePlan) => {
+PublisherUtils.createOrUpgradeWebsiteInWeblancer = async (website, plan, websitePlan, type) => {
     let id = process.env.PUBLISHER_ID;
     let password = process.env.PUBLISHER_PASSWORD;
     let url = process.env.WEBLANCER_EXPRESS_URL;
@@ -58,7 +58,7 @@ PublisherUtils.createOrUpgradeWebsiteInWeblancer = async (website, plan, website
     console.log("websitePlan", websitePlan);
     try {
         let response = await axios.post(`${url}/website/createorupdate`, {
-            website, plan, websitePlan
+            website, plan, websitePlan, type
         }, { headers: {
             'publisher-id': id,
             'publisher-password': password

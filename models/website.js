@@ -9,6 +9,9 @@ const Website = (sequelize, DataTypes) => {
         name: {
             type: DataTypes.STRING
         },
+        displayName: {
+            type: DataTypes.STRING
+        },
         description: {
             type: DataTypes.STRING
         },

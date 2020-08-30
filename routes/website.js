@@ -130,7 +130,7 @@ router.post('/', async (req, res) => {
         });
 
         let weblancerResponse = await PublisherUtils.createOrUpgradeWebsiteInWeblancer(
-            website.toJSON(), plan.toJSON(), websitePlan[0].toJSON()
+            website.toJSON(), plan.toJSON(), websitePlan[0].toJSON(), "website"
         );
 
         if (weblancerResponse.success) {
