@@ -128,7 +128,7 @@ router.post('/', async (req, res) => {
                     planId: plan.id
                 },
                 transaction
-            })[0]
+            })[0].toJSON()
         );
 
         if (weblancerResponse.success) {

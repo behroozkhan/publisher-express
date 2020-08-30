@@ -58,7 +58,7 @@ PublisherUtils.createOrUpgradeWebsiteInWeblancer = async (website, plan, website
     console.log("websitePlan", websitePlan);
     try {
         let response = await axios.post(`${url}/website/createorupdate`, {
-            websitePlan: websitePlan.toJSON()
+            website, plan, websitePlan
         }, { headers: {
             'publisher-id': id,
             'publisher-password': password
