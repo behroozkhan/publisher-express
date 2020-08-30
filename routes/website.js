@@ -119,7 +119,7 @@ router.post('/', async (req, res) => {
             transaction
         });
 
-        console.log("website", website.Instance.prototype);
+        console.log("website", website.prototype);
         await website.addPlan(plan, {through: {boughtDate, expireDate}, transaction});
 
         await user.addWebsite(website, {transaction});
