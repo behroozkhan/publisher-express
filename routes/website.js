@@ -112,7 +112,6 @@ router.post('/', async (req, res) => {
         let website = await models.Website.create({
             name,
             metadata,
-            subDomain,
             description
         }, {
             transaction
@@ -174,12 +173,10 @@ router.put('/', async (req, res) => {
 
     let name = req.body.name || website.name;
     let description = req.body.description || website.description;
-    let subDomain = req.body.subDomain || website.subDomain;
 
     website.update({
         name,
-        description,
-        subDomain
+        description
     })
     .success(result => {
         res.json(
