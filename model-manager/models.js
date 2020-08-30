@@ -39,8 +39,8 @@ Object.values(models).forEach(model => {
 });
 
 Object.values(models).forEach(model => {
-    if (allModels[model].associate)
-        allModels[model].associate(allModels);
+    if (model.associate)
+        model.associate(allModels);
 });
 
 let findAndCountAll = (req, res, model) => {
