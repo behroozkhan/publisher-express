@@ -35,6 +35,7 @@ const models = {
 
 let allModels = {};
 Object.values(models).forEach(model => {
+    console.log(model);
     allModels[model.modelName] = model;
 });
 
