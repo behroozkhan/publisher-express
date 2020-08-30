@@ -50,24 +50,23 @@ PublisherUtils.isSiteNameUnique = async (name, userId) => {
     }
 }
 
-PublisherUtils.createOrUpgradeWebsiteInWeblancer = async (endUserId, endWebsiteId,
-    resourcePlanId, permissionPlansId, planType, planOrder, metaData) => {
+PublisherUtils.createOrUpgradeWebsiteInWeblancer = async (websitePlan) => {
+    let id = process.env.PUBLISHER_ID;
+    let password = process.env.PUBLISHER_PASSWORD;
+    let url = process.env.WEBLANCER_EXPRESS_URL;
+    
+    try {
+        let response = await axios.post(`${url}/website/createorupdate`, {
+            websitePlan: websitePlan.toJSON()
+        }, { headers: {
+            'publisher-id': id,
+            'publisher-password': password
+        }});
 
-    let weblancerWebsiteCreateUrl = (await getConfig("WeblancerWebsiteCreateUrl")).value;
-
-    return axios.post(`${weblancerWebsiteCreateUrl}`, {
-        endUserId, endWebsiteId, resourcePlanId, permissionPlansId, planType, planOrder, metaData
-    })
-    .then(function (response) {
-        res.json(
-            response.data
-        );
-    })
-    .catch(function (error) {
-        res.status(500).json(
-            error.response.data
-        );
-    });
+        return response.data;
+    } catch (error) {
+        return error.response.data;
+    }
 }
 
 PublisherUtils.checkOwnerShip = (req, res, next) => {
@@ -79,8 +78,7 @@ PublisherUtils.getWeblancerConfig = async (key) => {
     let id = process.env.PUBLISHER_ID;
     let password = process.env.PUBLISHER_PASSWORD;
     let url = process.env.WEBLANCER_EXPRESS_URL;
-
-    console.log("getWeblancerConfig", id, password)
+    
     try {
         let response = await axios({
             url: `${url}/config/getbykey`,

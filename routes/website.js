@@ -122,8 +122,11 @@ router.post('/', async (req, res) => {
         await website.addPlan(plan, {through: {boughtDate, expireDate}, transaction});
 
         let weblancerResponse = await PublisherUtils.createOrUpgradeWebsiteInWeblancer(
-            user.id, website.id, plan.weblancerResourceId, plan.weblancerPermissionsId,
-            'Monthly', plan.order, metadata 
+            await website.getWebsite_plan({
+                where: {
+                    planId: plan.id
+                }
+            })
         );
 
         if (weblancerResponse.success) {
