@@ -21,6 +21,13 @@ const Website = (sequelize, DataTypes) => {
         metadata: {
             type: DataTypes.JSON
         }
+    }, {
+        indexes: [
+            {
+                unique: true,
+                fields: ['name', 'userId']
+            }
+        ]
     });
     
     return Website;

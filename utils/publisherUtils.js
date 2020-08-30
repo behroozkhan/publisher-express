@@ -1,4 +1,4 @@
-let { getConfig } = require("../models/config");
+let { getConfig } = require("../model-manager/models");
 let {models} = require('../model-manager/models');
 const axios = require('axios');
 

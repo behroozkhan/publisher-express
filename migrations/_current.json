@@ -237,13 +237,9 @@
                     "field": "summery",
                     "seqType": "Sequelize.STRING"
                 },
-                "weblancerResourceId": {
-                    "field": "weblancerResourceId",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "weblancerPermissionsId": {
-                    "field": "weblancerPermissionsId",
-                    "seqType": "Sequelize.ARRAY(Sequelize.INTEGER)"
+                "productsDetail": {
+                    "field": "productsDetail",
+                    "seqType": "Sequelize.JSON"
                 },
                 "createdAt": {
                     "allowNull": false,
@@ -410,6 +406,14 @@
                     "field": "extended",
                     "seqType": "Sequelize.BOOLEAN"
                 },
+                "addedProducts": {
+                    "field": "addedProducts",
+                    "seqType": "Sequelize.JSON"
+                },
+                "addedPrice": {
+                    "field": "addedPrice",
+                    "seqType": "Sequelize.FLOAT"
+                },
                 "createdAt": {
                     "allowNull": false,
                     "field": "createdAt",
@@ -497,8 +501,23 @@
                     "seqType": "Sequelize.BIGINT"
                 }
             },
-            "indexes": []
+            "indexes": {
+                "533f5b26d7130d745596ff22910a2459339c6103": {
+                    "unique": true,
+                    "fields": [
+                        "name",
+                        "userId"
+                    ],
+                    "name": "websites_name_user_id",
+                    "options": {
+                        "indexName": "websites_name_user_id",
+                        "name": "websites_name_user_id",
+                        "indicesType": "UNIQUE",
+                        "type": "UNIQUE"
+                    }
+                }
+            }
         }
     },
-    "revision": 5
+    "revision": 6
 }

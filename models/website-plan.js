@@ -18,6 +18,12 @@ const WebsitePlan = (sequelize, DataTypes) => {
         extended: {
             type: DataTypes.BOOLEAN,
         },
+        addedProducts: {
+            type: DataTypes.JSON,
+        },
+        addedPrice: {
+            type: DataTypes.FLOAT,
+        }
     });
      
     WebsitePlan.associate = function(models) {

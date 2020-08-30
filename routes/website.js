@@ -119,13 +119,9 @@ router.post('/', async (req, res) => {
             transaction
         });
 
-        console.log(website, user)
-
         await user.addWebsite(website, {transaction});
 
         await website.addPlan(plan, {through: {boughtDate, expireDate}, transaction});
-        
-        await transaction.commit();
 
         let weblancerResponse = await PublisherUtils.createOrUpgradeWebsiteInWeblancer(
             user.id, website.id, plan.weblancerResourceId, plan.weblancerPermissionsId,
@@ -133,6 +129,8 @@ router.post('/', async (req, res) => {
         );
 
         if (weblancerResponse.success) {
+            await transaction.commit();
+
             res.json(
                 new Response(true, {
                     website: website.toJSON()

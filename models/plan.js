@@ -37,12 +37,9 @@ const Plan = (sequelize, DataTypes) => {
         summery: {
             type: DataTypes.STRING,
         },
-        weblancerResourceId: {
-            type: DataTypes.INTEGER,
-        },
-        weblancerPermissionsId: {
-            type: DataTypes.ARRAY(DataTypes.INTEGER),
-        },
+        productsDetail: {
+            type: DataTypes.JSON,
+        }
     });
      
     return Plan;
