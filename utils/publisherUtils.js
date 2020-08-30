@@ -50,7 +50,7 @@ PublisherUtils.isSiteNameUnique = async (name, userId) => {
     }
 }
 
-PublisherUtils.createOrUpgradeWebsiteInWeblancer = async (websitePlan) => {
+PublisherUtils.createOrUpgradeWebsiteInWeblancer = async (website, plan, websitePlan) => {
     let id = process.env.PUBLISHER_ID;
     let password = process.env.PUBLISHER_PASSWORD;
     let url = process.env.WEBLANCER_EXPRESS_URL;
