@@ -38,6 +38,7 @@ Object.values(models).forEach(model => {
     allModels[model.modelName] = model;
 });
 
+console.log(allModels);
 Object.values(models).forEach(model => {
     if (model.associate)
         model.associate(allModels);
