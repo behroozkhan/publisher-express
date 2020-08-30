@@ -116,6 +116,7 @@ router.post('/', async (req, res) => {
             subDomain,
             description
         }, {
+            include: [models.Plan],
             transaction
         });
 
