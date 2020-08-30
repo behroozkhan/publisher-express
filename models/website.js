@@ -12,10 +12,6 @@ const Website = (sequelize, DataTypes) => {
         description: {
             type: DataTypes.STRING
         },
-        subDomain: {
-            type: DataTypes.STRING,
-            unique: true,
-        },
         serverIpAddress: {
             type: DataTypes.STRING
         },
