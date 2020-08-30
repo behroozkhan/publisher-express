@@ -55,6 +55,7 @@ PublisherUtils.createOrUpgradeWebsiteInWeblancer = async (websitePlan) => {
     let password = process.env.PUBLISHER_PASSWORD;
     let url = process.env.WEBLANCER_EXPRESS_URL;
     
+    console.log("websitePlan", websitePlan);
     try {
         let response = await axios.post(`${url}/website/createorupdate`, {
             websitePlan: websitePlan.toJSON()
