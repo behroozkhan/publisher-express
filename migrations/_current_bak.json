@@ -433,6 +433,7 @@
                     "onDelete": "CASCADE",
                     "onUpdate": "CASCADE",
                     "field": "websiteId",
+                    "allowNull": true,
                     "seqType": "Sequelize.BIGINT"
                 },
                 "planId": {
@@ -444,6 +445,7 @@
                     "onDelete": "CASCADE",
                     "onUpdate": "CASCADE",
                     "field": "planId",
+                    "allowNull": true,
                     "seqType": "Sequelize.INTEGER"
                 }
             },
@@ -519,5 +521,5 @@
             }
         }
     },
-    "revision": 6
+    "revision": 7
 }

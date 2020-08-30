@@ -10,7 +10,7 @@ const Plan = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             unique: true,
         },
-        isTrial: {
+        hasTrial: {
             type: DataTypes.BOOLEAN,
         },
         trialDuration: {
