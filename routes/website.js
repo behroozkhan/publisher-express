@@ -115,10 +115,9 @@ router.post('/', async (req, res) => {
             metadata,
             subDomain,
             description
+        }, {
+            transaction
         });
-        // }, {
-        //     transaction
-        // });
 
         await website.addPlan(plan, {through: {boughtDate, expireDate}, transaction});
 
