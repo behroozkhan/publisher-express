@@ -21,8 +21,8 @@ const WebsitePlan = (sequelize, DataTypes) => {
     });
      
     WebsitePlan.associate = function(models) {
-        models.website.belongsToMany(models.plan, { as:'plans', through: models.website_plan });
-        models.plan.belongsToMany(models.website, { through: models.website_plan });
+        models.website.belongsToMany(models.plan, { through: models.website_plan });
+        models.plan.belongsToMany(models.website, { as:'plans', through: models.website_plan });
     };
 
     return WebsitePlan;

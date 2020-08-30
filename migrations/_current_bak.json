@@ -254,17 +254,6 @@
                     "allowNull": false,
                     "field": "updatedAt",
                     "seqType": "Sequelize.DATE"
-                },
-                "websiteId": {
-                    "allowNull": true,
-                    "references": {
-                        "model": "websites",
-                        "key": "id"
-                    },
-                    "onDelete": "SET NULL",
-                    "onUpdate": "CASCADE",
-                    "field": "websiteId",
-                    "seqType": "Sequelize.BIGINT"
                 }
             },
             "indexes": []
@@ -511,21 +500,10 @@
                     "onUpdate": "CASCADE",
                     "field": "userId",
                     "seqType": "Sequelize.BIGINT"
-                },
-                "planId": {
-                    "allowNull": true,
-                    "references": {
-                        "model": "plans",
-                        "key": "id"
-                    },
-                    "onDelete": "SET NULL",
-                    "onUpdate": "CASCADE",
-                    "field": "planId",
-                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
         }
     },
-    "revision": 3
+    "revision": 4
 }

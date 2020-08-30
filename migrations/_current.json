@@ -463,11 +463,6 @@
                     "field": "description",
                     "seqType": "Sequelize.STRING"
                 },
-                "subDomain": {
-                    "unique": true,
-                    "field": "subDomain",
-                    "seqType": "Sequelize.STRING"
-                },
                 "serverIpAddress": {
                     "field": "serverIpAddress",
                     "seqType": "Sequelize.STRING"
@@ -505,5 +500,5 @@
             "indexes": []
         }
     },
-    "revision": 4
+    "revision": 5
 }
