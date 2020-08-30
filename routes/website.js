@@ -44,13 +44,12 @@ router.post('/', async (req, res) => {
     // create new website
     let name = req.body.name;
     let metadata = req.body.metadata || {};
-    let subDomain = req.body.subDomain || "";
     let description = req.body.description || "";
+    let userId = req.user.id;
 
-    let isUnique = await PublisherUtils.isSubDomainUnique(subDomain);
-    if (!isUnique) {
+    if (!await PublisherUtils.isSiteNameUnique(name, userId)) {
         res.status(409).json(
-            new Response(false, {}, "Subdomain is in use").json()
+            new Response(false, {}, "Name is in use").json()
         );
     }
 
@@ -84,7 +83,7 @@ router.post('/', async (req, res) => {
     try {
         user = await models.User.findOne({
             where: {
-                id: req.user.id
+                id: userId
             }
         });
 
@@ -132,9 +131,7 @@ router.post('/', async (req, res) => {
             await transaction.commit();
 
             res.json(
-                new Response(true, {
-                    website: website.toJSON()
-                }).json()
+                new Response(true, {}).json()
             );
         } else {
             throw Error (`Can't add website to weblancer server`);
@@ -144,9 +141,16 @@ router.post('/', async (req, res) => {
         // Rollback transaction only if the transaction object is defined
         if (transaction) await transaction.rollback();
         
-        res.status(500).json(
-            new Response(false, {error}, error.message).json()
-        );
+        if(error instanceof UniqueConstraintError){
+            res.status(201).json(
+                new Response(true, {}).json()
+            );
+        }
+        else{
+            res.status(500).json(
+                new Response(false, {error}, error.message).json()
+            );
+        }
     }
 })
 

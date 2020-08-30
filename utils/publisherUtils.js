@@ -34,18 +34,18 @@ PublisherUtils.isUserNameUnique = async (username) => {
     }
 }
 
-PublisherUtils.isSubDomainUnique = async (subDomain) => {
+PublisherUtils.isSiteNameUnique = async (name, userId) => {
     if (!subDomain)
         return true;
     
     try {
-        let count = await models.Website.count({ where: { subDomain: subDomain.toLowerCase() } })
+        let count = await models.Website.count({ where: { name, userId } })
         if (count != 0) {
             return false;
         }
         return true;
     } catch (error) {
-        console.log("PublisherUtils.isUserNameUnique", error);
+        console.log("PublisherUtils.isSiteNameUnique", error);
         return false;
     }
 }
