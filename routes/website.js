@@ -173,12 +173,11 @@ router.post('/', async (req, res) => {
             transaction
         });
 
-        console.log("website.toJSON()", website.toJSON());
-        console.log("plan.toJSON()", plan.toJSON());
-        console.log("websitePlan[0].toJSON()", websitePlan[0].toJSON());
-
         let weblancerResponse = await PublisherUtils.createOrUpgradeWebsiteInWeblancer(
-            website.toJSON(), plan.toJSON(), websitePlan[0].toJSON(), "website"
+            {...website.toJSON(), userId: user.id}, 
+            plan.toJSON(), 
+            websitePlan[0].toJSON(), 
+            "website"
         );
 
         if (weblancerResponse.success) {
