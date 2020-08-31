@@ -133,11 +133,18 @@ router.post('/', async (req, res) => {
     try {
         // get transaction
         transaction = await sequelize.transaction();
+        
+        let totalPriceOfPlan = plan.hasTrial ? 0 :
+            PublisherUtils.getPlanPriceFromProduct(plan.productsDetail, planTime);
+        let totalPayForPlan = planPrice;
     
         let website = await models.Website.create({
             name,
+            displayName: name,
             metadata,
-            description
+            description,
+            totalPayment: totalPayForPlan,
+            totalPrice: totalPriceOfPlan
         }, {
             transaction
         });
@@ -153,9 +160,6 @@ router.post('/', async (req, res) => {
             expireDate = moment.utc().add(1, 'M');
         else
             expireDate = moment.utc().add(1, 'y');
-        
-        let totalPriceOfPlan = PublisherUtils.getPlanPriceFromProduct(plan.productsDetail, planTime);
-        let totalPayForPlan = planPrice;
 
         await website.addPlan(plan, {through: {
             boughtDate, expireDate, totalPriceOfPlan, totalPayForPlan
