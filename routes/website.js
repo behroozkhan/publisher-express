@@ -119,6 +119,7 @@ router.post('/', async (req, res) => {
     res.status(500).json(
         new Response(false, {}, "Manual return").json()
     );
+    return;
 
     if (!plan.hasTrial) {
         // user must have credit for geting this website plan
