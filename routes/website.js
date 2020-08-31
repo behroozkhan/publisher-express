@@ -161,6 +161,8 @@ router.post('/', async (req, res) => {
         else
             expireDate = moment.utc().add(1, 'y');
 
+        console.log("plan.trialDuration", plan.trialDuration, expireDate);
+
         await website.addPlan(plan, {through: {
             boughtDate, expireDate, totalPriceOfPlan, totalPayForPlan
         }, transaction});
