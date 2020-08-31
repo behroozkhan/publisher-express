@@ -14,6 +14,10 @@ const WebsitePlan = (sequelize, DataTypes) => {
             values: ['trial', 'monthly', 'yearly'],
             defaultValue: 'trial'
         },
+        planOrder: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
+        },
         totalPayForPlan: {
             type: DataTypes.FLOAT,
         },

@@ -408,6 +408,13 @@
                     "field": "planTime",
                     "seqType": "Sequelize.ENUM('trial', 'monthly', 'yearly')"
                 },
+                "planOrder": {
+                    "defaultValue": {
+                        "value": 0
+                    },
+                    "field": "planOrder",
+                    "seqType": "Sequelize.INTEGER"
+                },
                 "totalPayForPlan": {
                     "field": "totalPayForPlan",
                     "seqType": "Sequelize.FLOAT"
@@ -546,5 +553,5 @@
             }
         }
     },
-    "revision": 15
+    "revision": 16
 }
