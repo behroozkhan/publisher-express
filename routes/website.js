@@ -115,11 +115,16 @@ router.post('/', async (req, res) => {
         return;
     }
 
+    console.log(plan);
+    res.status(500).json(
+        new Response(false, {}, "Manual return").json()
+    );
+
     if (!plan.hasTrial) {
         // user must have credit for geting this website plan
         if (!PublisherUtils.getCreditForPlan(user, plan, planTime)) {
             res.status(402).json(
-                new Response(false, {error}, "Not enough credit").json()
+                new Response(false, {}, "Not enough credit").json()
             );
             return;
         }
