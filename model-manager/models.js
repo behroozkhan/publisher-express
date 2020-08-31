@@ -49,7 +49,7 @@ let findAndCountAll = (req, res, model) => {
     let orderParam = req.query.orderParam || "createdAt";
     model.findAndCountAll({
         order: [[orderParam, 'DESC']],
-        limit: pageNumber,
+        limit: rowPerPage,
         offset: (pageNumber - 1) * rowPerPage,
     }).then(function (result) {
         res.json(
