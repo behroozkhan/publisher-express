@@ -23,6 +23,12 @@ const Website = (sequelize, DataTypes) => {
         },
         metadata: {
             type: DataTypes.JSON
+        },
+        totalPrice: {
+            type: DataTypes.FLOAT,
+        },
+        totalPayment: {
+            type: DataTypes.FLOAT,
         }
     }, {
         indexes: [

@@ -484,6 +484,14 @@
                     "field": "metadata",
                     "seqType": "Sequelize.JSON"
                 },
+                "totalPrice": {
+                    "field": "totalPrice",
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "totalPayment": {
+                    "field": "totalPayment",
+                    "seqType": "Sequelize.FLOAT"
+                },
                 "createdAt": {
                     "allowNull": false,
                     "field": "createdAt",
@@ -524,5 +532,5 @@
             }
         }
     },
-    "revision": 9
+    "revision": 10
 }
