@@ -115,29 +115,24 @@ router.post('/', async (req, res) => {
         return;
     }
 
-    console.log(plan);
-    res.status(500).json(
-        new Response(false, {}, "Manual return").json()
-    );
-    return;
-
+    let planPrice = 0;
     if (!plan.hasTrial) {
         // user must have credit for geting this website plan
-        if (!PublisherUtils.getCreditForPlan(user, plan, planTime)) {
+        let {success, price} = PublisherUtils.getCreditForPlan(user, plan, planTime);
+        if (!success) {
             res.status(402).json(
                 new Response(false, {}, "Not enough credit").json()
             );
             return;
         }
+
+        planPrice = price;
     }
 
     let transaction;
     try {
         // get transaction
         transaction = await sequelize.transaction();
-
-        let boughtDate = moment.utc();
-        let expireDate = moment.utc().add(plan.trialDuration, 'd');
     
         let website = await models.Website.create({
             name,
@@ -150,7 +145,21 @@ router.post('/', async (req, res) => {
         await user.addWebsite(website, {transaction});
         await user.save({ fields: ['credit'], transaction });
 
-        await website.addPlan(plan, {through: {boughtDate, expireDate}, transaction});
+        let boughtDate = moment.utc();
+        let expireDate;
+        if (plan.hasTrial)
+            expireDate = moment.utc().add(plan.trialDuration, 'd');
+        else if (planTime === 'monthly')
+            expireDate = moment.utc().add(1, 'M');
+        else
+            expireDate = moment.utc().add(1, 'y');
+        
+        let totalPriceOfPlan = PublisherUtils.getPlanPriceFromProduct(plan.productsDetail, planTime);
+        let totalPayForPlan = planPrice;
+
+        await website.addPlan(plan, {through: {
+            boughtDate, expireDate, totalPriceOfPlan, totalPayForPlan
+        }, transaction});
 
         let websitePlan = await website.getWebsite_plans({
             where: {

@@ -356,14 +356,14 @@
                 },
                 "credit": {
                     "field": "credit",
-                    "seqType": "Sequelize.INTEGER"
+                    "seqType": "Sequelize.FLOAT"
                 },
                 "minCredit": {
                     "defaultValue": {
                         "value": 0
                     },
                     "field": "minCredit",
-                    "seqType": "Sequelize.INTEGER"
+                    "seqType": "Sequelize.FLOAT"
                 },
                 "emailVerify": {
                     "field": "emailVerify",
@@ -539,5 +539,5 @@
             }
         }
     },
-    "revision": 12
+    "revision": 13
 }

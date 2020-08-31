@@ -19,9 +19,11 @@ const WebsitePlan = (sequelize, DataTypes) => {
         },
         addedProducts: {
             type: DataTypes.JSON,
+            defaultValue: []
         },
         addedPrice: {
             type: DataTypes.FLOAT,
+            defaultValue: 0
         }
     });
      

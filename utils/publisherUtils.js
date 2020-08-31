@@ -26,11 +26,25 @@ PublisherUtils.getCreditForPlan = (user, plan, planTime) => {
         (plan.offpriceYearly || plan.priceYearly);
 
     if (user.credit - user.minCredit <= price)
-        return false;
+        return {success: false};
 
     user.credit -= price;
 
-    return true;
+    return {success: true, price};
+}
+
+PublisherUtils.getPlanPriceFromProduct = (productsDetail, planTime) => {
+    if (planTime === 'trial')
+        return 0;
+
+    let sum = 0;
+    (productsDetail || []).forEach(product => {
+        sum += (planTime === 'monthly' ?
+            product.priceMonthly :
+            product.priceYearly);
+    });
+
+    return sum;
 }
 
 PublisherUtils.isUserNameUnique = async (username) => {
