@@ -179,23 +179,23 @@ router.post('/', async (req, res) => {
                 new Response(true, {}).json()
             );
         } else {
-            throw Error (`Can't add website to weblancer server`);
+            throw Error (`Can't commit transaction`);
         }
     } catch (error) {
         console.log("/website/ error 3", error);
         // Rollback transaction only if the transaction object is defined
         if (transaction) await transaction.rollback();
         
-        if(error instanceof UniqueConstraintError){
-            res.status(201).json(
-                new Response(true, {}).json()
-            );
-        }
-        else{
+        // if(error instanceof UniqueConstraintError){
+        //     res.status(201).json(
+        //         new Response(true, {}).json()
+        //     );
+        // }
+        // else{
             res.status(500).json(
                 new Response(false, {error}, error.message).json()
             );
-        }
+        // }
     }
 })
 
