@@ -393,8 +393,8 @@
                     "field": "boughtDate",
                     "seqType": "Sequelize.DATE"
                 },
-                "expireTime": {
-                    "field": "expireTime",
+                "expireDate": {
+                    "field": "expireDate",
                     "seqType": "Sequelize.DATE"
                 },
                 "totalPriceOfPlan": {
@@ -546,5 +546,5 @@
             }
         }
     },
-    "revision": 14
+    "revision": 15
 }

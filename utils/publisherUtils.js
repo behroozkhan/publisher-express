@@ -118,7 +118,6 @@ PublisherUtils.getWeblancerConfig = async (key) => {
             }
         })
         
-        console.log("response", response)
         return response.data;
     } catch (error) {
         console.log("error", error)

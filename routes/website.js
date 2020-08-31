@@ -82,7 +82,6 @@ router.post('/', async (req, res) => {
             }
 
             plan = configResult.data.configValue;
-            console.log("plan", plan);
             plan = await models.Plan.create(plan);
         }
     } catch (error) {

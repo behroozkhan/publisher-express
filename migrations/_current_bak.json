@@ -413,10 +413,17 @@
                     "seqType": "Sequelize.FLOAT"
                 },
                 "addedProducts": {
+                    "defaultValue": {
+                        "internal": true,
+                        "value": "Sequelize.Array"
+                    },
                     "field": "addedProducts",
                     "seqType": "Sequelize.JSON"
                 },
                 "addedPrice": {
+                    "defaultValue": {
+                        "value": 0
+                    },
                     "field": "addedPrice",
                     "seqType": "Sequelize.FLOAT"
                 },
@@ -539,5 +546,5 @@
             }
         }
     },
-    "revision": 13
+    "revision": 14
 }
