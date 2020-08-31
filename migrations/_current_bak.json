@@ -358,6 +358,13 @@
                     "field": "credit",
                     "seqType": "Sequelize.INTEGER"
                 },
+                "minCredit": {
+                    "defaultValue": {
+                        "value": 0
+                    },
+                    "field": "minCredit",
+                    "seqType": "Sequelize.INTEGER"
+                },
                 "emailVerify": {
                     "field": "emailVerify",
                     "seqType": "Sequelize.BOOLEAN"
@@ -484,6 +491,14 @@
                     "field": "metadata",
                     "seqType": "Sequelize.JSON"
                 },
+                "totalPrice": {
+                    "field": "totalPrice",
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "totalPayment": {
+                    "field": "totalPayment",
+                    "seqType": "Sequelize.FLOAT"
+                },
                 "createdAt": {
                     "allowNull": false,
                     "field": "createdAt",
@@ -524,5 +539,5 @@
             }
         }
     },
-    "revision": 9
+    "revision": 12
 }

@@ -34,7 +34,11 @@ const User = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
         },
         credit: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
+        },
+        minCredit: {
+            type: DataTypes.FLOAT,
+            defaultValue: 0
         },
         emailVerify: {
             type: DataTypes.BOOLEAN,

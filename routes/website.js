@@ -63,13 +63,15 @@ router.post('/', async (req, res) => {
                 }
             });
         } else {
-            plan = await models.Plan.findOne({
+            plan = (await models.Plan.findAll({
                 where: {
-                    order: 0,
                     hasTrial: true,
-                    priceMonthly: 0
-                }
-            });
+                },
+                order: [
+                    ['priceMonthly', 'ASC']
+                ],
+                limit: 1
+            }))[0];
         }
 
         if (!plan) {
@@ -110,6 +112,11 @@ router.post('/', async (req, res) => {
             new Response(false, {error}, "Server error").json()
         );
         return;
+    }
+
+    if (!plan.hasTrial) {
+        // user must have credit for geting this website plan
+        
     }
 
     let transaction;
