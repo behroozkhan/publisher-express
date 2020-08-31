@@ -46,6 +46,7 @@ router.post('/', async (req, res) => {
     let metadata = req.body.metadata || {};
     let description = req.body.description || "";
     let planId = req.body.planId;
+    let planTime = req.body.planTime || 'monthly';
     let userId = req.user.id;
 
     if (!await PublisherUtils.isSiteNameUnique(name, userId)) {
@@ -116,7 +117,12 @@ router.post('/', async (req, res) => {
 
     if (!plan.hasTrial) {
         // user must have credit for geting this website plan
-        
+        if (!PublisherUtils.getCreditForPlan(user, plan, planTime)) {
+            res.status(402).json(
+                new Response(false, {error}, "Not enough credit").json()
+            );
+            return;
+        }
     }
 
     let transaction;
@@ -136,6 +142,7 @@ router.post('/', async (req, res) => {
         });
 
         await user.addWebsite(website, {transaction});
+        await user.save({ fields: ['credit'], transaction });
 
         await website.addPlan(plan, {through: {boughtDate, expireDate}, transaction});
 

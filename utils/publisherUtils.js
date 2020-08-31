@@ -21,6 +21,18 @@ PublisherUtils.getBackMoney = (oldPlan) => {
     return Math.max(0, backMoney);
 }
 
+PublisherUtils.getCreditForPlan = (user, plan, planTime) => {
+    let price = planTime === 'monthly' ? (plan.offPriceMonthly || plan.priceMonthly) :
+        (plan.offpriceYearly || plan.priceYearly);
+
+    if (user.credit - user.minCredit <= price)
+        return false;
+
+    user.credit -= price;
+
+    return true;
+}
+
 PublisherUtils.isUserNameUnique = async (username) => {
     try {
         let count = await models.User.count({ where: { username: username.toLowerCase() } });
