@@ -3,7 +3,13 @@ const WebsitePlan = (sequelize, DataTypes) => {
         boughtDate: {
             type: DataTypes.DATE,
         },
+        startDate: {
+            type: DataTypes.DATE,
+        },
         expireDate: {
+            type: DataTypes.DATE,
+        },
+        upgradeDate: {
             type: DataTypes.DATE,
         },
         totalPriceOfPlan: {

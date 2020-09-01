@@ -401,6 +401,19 @@ router.put('/acl/:id', async (req, res) => {
 router.post('/editor', async (req, res) => {
     // user request editor for an app, service, component or website
     // create an editor in editor server and return url to user
+
+    // TODO 1. request weblancer express for an editor for a website with this inputs:
+    // TODO    {websiteMetaData, planProductDetails & planAddedProductDetails, }
+    // TODO 2. weblancer express request an editor to editor server
+    // TODO 3. editor server prepare an editor react client, npm install & build it for requested 
+    // TODO    products like additional apps and components.
+    // TODO 4. finaly editor server create an access token for publisher and one for user & create end
+    // TODO    url & send it to weblancer express to update long-process metadata
+    // TODO 5. user frequently check for long=process and when access token be ready, show editor url
+    // TODO 6. publisher express save long-process as an cached editor in database to use later when
+    // TODO    user request it in another session
+    // TODO 7. editors remain for some minutes or hours and publisher express should check it when
+    // TODO    user requet the editor
 })
 
 module.exports = router;

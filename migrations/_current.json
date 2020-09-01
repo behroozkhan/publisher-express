@@ -201,6 +201,10 @@
                     "field": "name",
                     "seqType": "Sequelize.STRING"
                 },
+                "group": {
+                    "field": "group",
+                    "seqType": "Sequelize.STRING"
+                },
                 "hasTrial": {
                     "field": "hasTrial",
                     "seqType": "Sequelize.BOOLEAN"
@@ -393,8 +397,16 @@
                     "field": "boughtDate",
                     "seqType": "Sequelize.DATE"
                 },
+                "startDate": {
+                    "field": "startDate",
+                    "seqType": "Sequelize.DATE"
+                },
                 "expireDate": {
                     "field": "expireDate",
+                    "seqType": "Sequelize.DATE"
+                },
+                "upgradeDate": {
+                    "field": "upgradeDate",
                     "seqType": "Sequelize.DATE"
                 },
                 "totalPriceOfPlan": {
@@ -553,5 +565,5 @@
             }
         }
     },
-    "revision": 16
+    "revision": 17
 }

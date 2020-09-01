@@ -10,6 +10,9 @@ const Plan = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             unique: true,
         },
+        group: {
+            type: DataTypes.STRING,
+        },
         hasTrial: {
             type: DataTypes.BOOLEAN,
         },
