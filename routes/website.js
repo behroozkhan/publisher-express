@@ -11,6 +11,25 @@ router.get('/', async (req, res) => {
     findAndCountAll(req, res, models.Website);
 })
 
+router.post('/longprocess', async (req, res) => {
+    // user request editor for an app, service, component or website
+    // create an editor in editor server and return url to user
+    let {id} = req.body;
+
+    let result = await PublisherUtils.callWeblancer(`/long-process/${id}`, undefined, 'get');
+
+    if (!result.success){
+        res.status(500).json(
+            result
+        );
+        return;
+    }
+
+    res.json(
+        result
+    );
+})
+
 router.get('/:id', async (req, res) => {
     // return website by id
     let id = req.params.id;
