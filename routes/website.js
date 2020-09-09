@@ -402,7 +402,7 @@ router.post('/editor', async (req, res) => {
     // user request editor for an app, service, component or website
     // create an editor in editor server and return url to user
 
-    // TODO 1. request weblancer express for an editor for a website with this inputs:
+    // TODO 1. request weblancer express for an editor for a website with this inputs:ww
     // TODO    {websiteMetaData, planProductDetails & planAddedProductDetails, }
     // TODO 2. weblancer express request an editor to editor server
     // TODO 3. editor server prepare an editor react client, npm install & build it for requested 
@@ -414,6 +414,21 @@ router.post('/editor', async (req, res) => {
     // TODO    user request it in another session
     // TODO 7. editors remain for some minutes or hours and publisher express should check it when
     // TODO    user requet the editor
+
+    let {websiteId} = req.body;
+
+    let result = await PublisherUtils.callWeblancer('/editor/request', {websiteId}, 'post');
+
+    if (!result.success){
+        res.status(500).json(
+            result
+        );
+        return;
+    }
+
+    res.json(
+        result
+    );
 })
 
 module.exports = router;

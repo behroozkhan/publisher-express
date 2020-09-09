@@ -125,4 +125,27 @@ PublisherUtils.getWeblancerConfig = async (key) => {
     }
 }
 
+PublisherUtils.callWeblancer = async (query, data, method) => {
+    let id = process.env.PUBLISHER_ID;
+    let password = process.env.PUBLISHER_PASSWORD;
+    let url = process.env.WEBLANCER_EXPRESS_URL;
+    
+    try {
+        let response = await axios({
+            url: `${url}${query}`,
+            method: method,
+            data: data,
+            headers: {
+                'publisher-id': id,
+                'publisher-password': password
+            }
+        })
+        
+        return response.data;
+    } catch (error) {
+        console.log("callWeblancer error", error)
+        return error.response.data;
+    }
+}
+
 module.exports = PublisherUtils;
