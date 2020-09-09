@@ -450,4 +450,21 @@ router.post('/editor', async (req, res) => {
     );
 })
 
+router.post('/delete-editor', async (req, res) => {
+    let {longProcessId} = req.body;
+
+    let result = await PublisherUtils.callWeblancer(`/delete/${longProcessId}`, undefined, 'get');
+
+    if (!result.success){
+        res.status(500).json(
+            result
+        );
+        return;
+    }
+
+    res.json(
+        result
+    );
+})
+
 module.exports = router;
