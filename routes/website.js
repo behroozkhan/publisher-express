@@ -163,7 +163,7 @@ router.post('/', async (req, res) => {
         console.log("plan.trialDuration", plan.trialDuration, expireDate);
 
         await website.addPlan(plan, {through: {
-            boughtDate, expireDate, totalPriceOfPlan, totalPayForPlan
+            boughtDate ,startDate: boughtDate , expireDate, totalPriceOfPlan, totalPayForPlan
         }, transaction});
 
         let websitePlan = await website.getWebsite_plans({
