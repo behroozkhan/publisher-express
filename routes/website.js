@@ -33,13 +33,13 @@ router.post('/longprocess', async (req, res) => {
 router.get('/:id', async (req, res) => {
     // return website by id
     let id = req.params.id;
-    models.Website.find({
+    models.Website.findOne({
         where: {
            id: id
         }
     }).then(function(website) {
         if (!website) {
-            res.status(404).json(
+            res.status(410).json(
                 new Response(false, {}, 
                     "Website not found"
                 ).json()
