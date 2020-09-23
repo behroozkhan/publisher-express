@@ -34,7 +34,7 @@ router.get('/mine', function (req, res) {
 
         res.json(
             new Response(true, {
-                user: user.toJSON()
+                user: PublisherUtils.getSecureUser(user)
             }).json()
         );
     }).catch(error => {
