@@ -18,7 +18,7 @@ router.get('/', function (req, res) {
 router.get('/mine', function (req, res) {
     // return user by id
     let id = req.user.id;
-    models.User.find({
+    models.User.findOne({
         where: {
            id: id
         }
