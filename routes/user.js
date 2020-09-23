@@ -276,9 +276,26 @@ router.post('/login',async function (req, res) {
 
     const accessToken = jwt.sign(user.toJSON(), process.env.JWT_ACCESS_TOKEN_SECRET);
     res.json(
-        new Response(true, {accessToken: accessToken}).json()
+        new Response(true, {accessToken: accessToken, user: getSecureUser(user)}).json()
     );
 })
+
+let getSecureUser = (dbUser) => {
+    return {
+        id: id,
+        username: username,
+        firstName: firstName,
+        lastName: lastName,
+        role: role,
+        nationalCode: nationalCode,
+        mobile: mobile,
+        email: email,
+        credit: credit,
+        minCredit: minCredit,
+        emailVerify: emailVerify,
+        mobileVerify: mobileVerify
+    }
+}
 
 router.post('/register',async function (req, res) {
     // register user
