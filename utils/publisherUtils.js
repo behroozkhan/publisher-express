@@ -23,18 +23,18 @@ PublisherUtils.getBackMoney = (oldPlan) => {
 
 PublisherUtils.getSecureUser = (dbUser) => {
     return {
-        id: id,
-        username: username,
-        firstName: firstName,
-        lastName: lastName,
-        role: role,
-        nationalCode: nationalCode,
-        mobile: mobile,
-        email: email,
-        credit: credit,
-        minCredit: minCredit,
-        emailVerify: emailVerify,
-        mobileVerify: mobileVerify
+        id: dbUser.id,
+        username: dbUser.username,
+        firstName: dbUser.firstName,
+        lastName: dbUser.lastName,
+        role: dbUser.role,
+        nationalCode: dbUser.nationalCode,
+        mobile: dbUser.mobile,
+        email: dbUser.email,
+        credit: dbUser.credit,
+        minCredit: dbUser.minCredit,
+        emailVerify: dbUser.emailVerify,
+        mobileVerify: dbUser.mobileVerify
     }
 }
 
