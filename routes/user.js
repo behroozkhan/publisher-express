@@ -15,6 +15,35 @@ router.get('/', function (req, res) {
     findAndCountAll(req, res, models.User);
 })
 
+router.get('/mine', function (req, res) {
+    // return user by id
+    let id = req.user.id;
+    models.User.find({
+        where: {
+           id: id
+        }
+    }).then(function(user) {
+        if (!user) {
+            res.status(410).json(
+                new Response(false, {}, 
+                    "User not found"
+                ).json()
+            );
+            return;
+        }
+
+        res.json(
+            new Response(true, {
+                user: user.toJSON()
+            }).json()
+        );
+    }).catch(error => {
+        res.status(500).json(
+            new Response(false, {}, error.message).json()
+        );
+    });
+})
+
 router.get('/:id', function (req, res) {
     // return user by id
     let id = req.params.id;
@@ -274,28 +303,11 @@ router.post('/login',async function (req, res) {
         return;
     }
 
-    const accessToken = jwt.sign(user.toJSON(), process.env.JWT_ACCESS_TOKEN_SECRET);
+    const accessToken = jwt.sign(PublisherUtils.getSecureUser(user), process.env.JWT_ACCESS_TOKEN_SECRET);
     res.json(
-        new Response(true, {accessToken: accessToken, user: getSecureUser(user)}).json()
+        new Response(true, {accessToken: accessToken}).json()
     );
 })
-
-let getSecureUser = (dbUser) => {
-    return {
-        id: id,
-        username: username,
-        firstName: firstName,
-        lastName: lastName,
-        role: role,
-        nationalCode: nationalCode,
-        mobile: mobile,
-        email: email,
-        credit: credit,
-        minCredit: minCredit,
-        emailVerify: emailVerify,
-        mobileVerify: mobileVerify
-    }
-}
 
 router.post('/register',async function (req, res) {
     // register user

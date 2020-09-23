@@ -21,6 +21,23 @@ PublisherUtils.getBackMoney = (oldPlan) => {
     return Math.max(0, backMoney);
 }
 
+PublisherUtils.getSecureUser = (dbUser) => {
+    return {
+        id: id,
+        username: username,
+        firstName: firstName,
+        lastName: lastName,
+        role: role,
+        nationalCode: nationalCode,
+        mobile: mobile,
+        email: email,
+        credit: credit,
+        minCredit: minCredit,
+        emailVerify: emailVerify,
+        mobileVerify: mobileVerify
+    }
+}
+
 PublisherUtils.getCreditForPlan = (user, plan, planTime) => {
     let price = planTime === 'monthly' ? (plan.offPriceMonthly || plan.priceMonthly) :
         (plan.offpriceYearly || plan.priceYearly);
