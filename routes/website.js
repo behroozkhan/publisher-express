@@ -232,30 +232,49 @@ router.put('/', async (req, res) => {
 
     let website;
     try {
-        website = await models.Website.find({
+        website = await models.Website.findOne({
             where: {
                 id: id
             }
         });
-    } catch {
-        res.status(404).json(
-            new Response(false, {}, "User not found").json()
+        
+        if (!website) {
+            res.status(410).json(
+                new Response(false, {}, 
+                    "Website not found"
+                ).json()
+            );
+            return;
+        }
+    } catch (error) {
+        res.status(500).json(
+            new Response(false, {}, "User not found 2").json()
         );
         return;
     }
 
     let name = req.body.name || website.name;
     let description = req.body.description || website.description;
+    let metadata = req.body.metadata || website.metadata;
 
-    website.update({
-        name,
-        description
-    })
-    .success(result => {
+    
+    try {
+        await website.update({
+            name,
+            description,
+            metadata
+        });
+        
         res.json(
             new Response(true, website).json()
         );
-    })
+    } catch (error) {
+        console.log("Can't update website", error);
+        res.status(500).json(
+            new Response(false, {}, "Can't update website").json()
+        );
+        return;
+    }
 })
 
 router.delete('/', async (req, res) => {
