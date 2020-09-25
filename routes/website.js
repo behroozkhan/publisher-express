@@ -256,13 +256,12 @@ router.put('/', async (req, res) => {
     let name = req.body.name || website.name;
     let description = req.body.description || website.description;
     let metadata = req.body.metadata || website.metadata;
-
     
     try {
         await website.update({
             name,
             description,
-            metadata
+            metadata: {...website.metadata, ...metadata}
         });
         
         res.json(
