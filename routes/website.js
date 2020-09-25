@@ -228,7 +228,7 @@ router.post('/', async (req, res) => {
 
 router.put('/', async (req, res) => {
     // update website
-    let id = req.params.id;
+    let id = req.body.id;
 
     let website;
     try {
