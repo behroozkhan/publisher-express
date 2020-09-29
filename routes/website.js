@@ -433,10 +433,6 @@ router.post('/plan/:id', async (req, res) => {
     }
 })
 
-router.post('/publish', async (req, res) => {
-    // publish request for a website
-})
-
 router.put('/acl/:id', async (req, res) => {
     // change access controll of website
 })
