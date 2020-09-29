@@ -494,6 +494,26 @@ router.post('/publish', async (req, res) => {
     );
 })
 
+router.post('/publishProcess', async (req, res) => {
+    let {websiteId} = req.body;
+
+    let result = await PublisherUtils.callWeblancer('/editor/publishProcess', {
+        websiteId,
+        username: req.user.username
+    }, 'post');
+
+    if (!result.success){
+        res.status(500).json(
+            result
+        );
+        return;
+    }
+
+    res.json(
+        result
+    );
+})
+
 router.post('/delete-editor', async (req, res) => {
     let {longProcessId} = req.body;
 
