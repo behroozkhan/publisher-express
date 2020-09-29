@@ -476,6 +476,7 @@ router.post('/editor', async (req, res) => {
 
 router.post('/publish', async (req, res) => {
     let {websiteId} = req.body;
+    console.log("website/publish", websiteId);
 
     let result = await PublisherUtils.callWeblancer('/editor/publish', {
         websiteId,
