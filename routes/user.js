@@ -286,7 +286,7 @@ router.post('/login',async function (req, res) {
                 username: (req.body.username || "").toLowerCase(),
                 password: req.body.password || "",
             },
-            attributes: ['id', 'role']
+            attributes: ['id', 'role', 'username']
         });
 
         if (!user) {
