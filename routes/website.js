@@ -18,6 +18,12 @@ router.post('/longprocess', async (req, res) => {
 
     let result = await PublisherUtils.callWeblancer(`/long-process/${id}`, undefined, 'get');
 
+    try {
+        delete result.data.longProcess.metaData.publisherAccessToken;
+    } catch (error) {
+        console.log("longprocess Can't delete publisherAccessToken:", error);
+    }
+
     if (!result.success){
         res.status(500).json(
             result
@@ -439,22 +445,39 @@ router.post('/editor', async (req, res) => {
     // user request editor for an app, service, component or website
     // create an editor in editor server and return url to user
 
-    // TODO 1. request weblancer express for an editor for a website with this inputs:ww
-    // TODO    {websiteMetaData, planProductDetails & planAddedProductDetails, }
-    // TODO 2. weblancer express request an editor to editor server
-    // TODO 3. editor server prepare an editor react client, npm install & build it for requested 
-    // TODO    products like additional apps and components.
-    // TODO 4. finaly editor server create an access token for publisher and one for user & create end
-    // TODO    url & send it to weblancer express to update long-process metadata
-    // TODO 5. user frequently check for long=process and when access token be ready, show editor url
-    // TODO 6. publisher express save long-process as an cached editor in database to use later when
-    // TODO    user request it in another session
-    // TODO 7. editors remain for some minutes or hours and publisher express should check it when
-    // TODO    user requet the editor
+    // 1. request weblancer express for an editor for a website with this inputs:
+    //    {websiteMetaData, planProductDetails & planAddedProductDetails, }
+    // 2. weblancer express request an editor to editor server
+    // 3. editor server prepare an editor react client, npm install & build it for requested 
+    //    products like additional apps and components.
+    // 4. finaly editor server create an access token for publisher and one for user & create end
+    //    url & send it to weblancer express to update long-process metadata
+    // 5. user frequently check for long=process and when access token be ready, show editor url
+    // 6. publisher express save long-process as an cached editor in database to use later when
+    //    user request it in another session
+    // 7. editors remain for some minutes or hours and publisher express should check it when
+    //    user requet the editor
 
     let {websiteId} = req.body;
 
     let result = await PublisherUtils.callWeblancer('/editor/request', {websiteId}, 'post');
+
+    if (!result.success){
+        res.status(500).json(
+            result
+        );
+        return;
+    }
+
+    res.json(
+        result
+    );
+})
+
+router.post('/publish', async (req, res) => {
+    let {websiteId} = req.body;
+
+    let result = await PublisherUtils.callWeblancer('/editor/publish', {websiteId}, 'post');
 
     if (!result.success){
         res.status(500).json(
