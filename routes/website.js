@@ -472,23 +472,23 @@ router.post('/editor', async (req, res) => {
 
 router.post('/publish', async (req, res) => {
     let {websiteId} = req.body;
-    console.log("website/publish", websiteId);
+    console.log("website/publish", websiteId, req.user);
 
-    let result = await PublisherUtils.callWeblancer('/editor/publish', {
-        websiteId,
-        username: req.user.username
-    }, 'post');
+    // let result = await PublisherUtils.callWeblancer('/editor/publish', {
+    //     websiteId,
+    //     username: req.user.username
+    // }, 'post');
 
-    if (!result.success){
-        res.status(500).json(
-            result
-        );
-        return;
-    }
+    // if (!result.success){
+    //     res.status(500).json(
+    //         result
+    //     );
+    //     return;
+    // }
 
-    res.json(
-        result
-    );
+    // res.json(
+    //     result
+    // );
 })
 
 router.post('/publishProcess', async (req, res) => {
