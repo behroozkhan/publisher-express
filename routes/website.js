@@ -269,6 +269,18 @@ router.put('/', async (req, res) => {
             description,
             metadata: {...website.metadata, ...metadata}
         });
+
+        let result = await PublisherUtils.callWeblancer('/website/createorupdate', {
+            website: website.toJSON(), 
+            type: website.type
+        }, 'post');
+
+        if (!result.success){
+            res.status(500).json(
+                result
+            );
+            return;
+        }
         
         res.json(
             new Response(true, website).json()
