@@ -264,6 +264,7 @@ router.put('/', async (req, res) => {
     let metadata = req.body.metadata || website.metadata;
     
     try {
+        console.log("website put ", name, req.body.name, website.name)
         await website.update({
             name,
             description,
